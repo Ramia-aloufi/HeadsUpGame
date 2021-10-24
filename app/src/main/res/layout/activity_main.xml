@@ -85,7 +85,17 @@
                 android:background="#E64A19"
 
                 android:padding="16px"
-                android:text="Button" />
+                android:text="Start" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFA000"
+                android:layout_marginTop="16dp"
+
+                android:padding="16px"
+                android:text="Data"/>
         </LinearLayout>
 
     </RelativeLayout>

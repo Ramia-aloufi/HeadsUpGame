@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var someOf: TextView
     private lateinit var tim: TextView
     private lateinit var btn: Button
+    private lateinit var btn2: Button
     var ii = 0
     var starta = true
     var startb = false
@@ -42,6 +43,10 @@ class MainActivity : AppCompatActivity() {
         init()
         btn.setOnClickListener {
             start()
+        }
+        btn2.setOnClickListener {
+            var intent = Intent(this,MainActivity2::class.java)
+            startActivity(intent)
         }
 
     }
@@ -60,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         celebrities = arrayListOf()
         tim = findViewById(R.id.time)
         btn = findViewById(R.id.button)
+        btn2 = findViewById(R.id.button2)
     }
 
     fun start() {
