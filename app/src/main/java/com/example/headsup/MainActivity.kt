@@ -27,12 +27,14 @@ class MainActivity : AppCompatActivity() {
     lateinit var portratstart: RelativeLayout
     lateinit var portrat: RelativeLayout
     lateinit var land: RelativeLayout
-    lateinit var celebrities: ArrayList<JSONObject>
+//    lateinit var celebrities: ArrayList<JSONObject>
+    lateinit var celebrities: ArrayList<Clibrites>
     lateinit var title: TextView
     lateinit var someOf: TextView
     private lateinit var tim: TextView
     private lateinit var btn: Button
     private lateinit var btn2: Button
+    lateinit var dbhlpr:DBHelper
     var ii = 0
     var starta = true
     var startb = false
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        dbhlpr = DBHelper(this)
         init()
         btn.setOnClickListener {
             start()
@@ -62,10 +65,12 @@ class MainActivity : AppCompatActivity() {
         land = findViewById(R.id.land)
         title = findViewById(R.id.title)
         someOf = findViewById(R.id.someOf)
-        celebrities = arrayListOf()
+//        celebrities = arrayListOf()
+        celebrities = tvtxt()
         tim = findViewById(R.id.time)
         btn = findViewById(R.id.button)
         btn2 = findViewById(R.id.button2)
+
     }
 
     fun start() {
@@ -82,7 +87,8 @@ class MainActivity : AppCompatActivity() {
             Log.d("starta","$starta")
             Log.d("startb","$startb")
         } else {
-            requestAPIData()
+//            requestAPIData()
+            jsonarrayToUI()
             ii++
             Log.d("starta","$starta")
             Log.d("startb","$startb")
@@ -131,59 +137,75 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun requestAPIData() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val data = async {
-                checkApiUrl()
-            }.await()
-            Log.d("qqqq", "$data")
-            if (data.isNotEmpty()) {
-                withContext(Dispatchers.Main) {
-                    apiDataToJsonArray(data)
-                }
-            } else {
+//    fun requestAPIData() {
+//        CoroutineScope(Dispatchers.IO).launch {
+//            val data = async {
+//                checkApiUrl()
+//            }.await()
+//            Log.d("qqqq", "$data")
+//            if (data.isNotEmpty()) {
+//                withContext(Dispatchers.Main) {
+//                    apiDataToJsonArray(data)
+//                }
+//            } else {
+//
+//            }
+//        }
+//    }
 
-            }
-        }
-    }
+//    fun checkApiUrl(): String {
+//        var response = ""
+//        try {
+//            response = URL("https://dojo-recipes.herokuapp.com/celebrities/")
+//                .readText(Charsets.UTF_8)
+//        } catch (e: Exception) {
+//            println("Error: $e")
+//
+//        }
+//        println(response)
+//        Log.d("response", response.toString())
+//        return response
+//    }
 
-    fun checkApiUrl(): String {
-        var response = ""
-        try {
-            response = URL("https://dojo-recipes.herokuapp.com/celebrities/")
-                .readText(Charsets.UTF_8)
-        } catch (e: Exception) {
-            println("Error: $e")
-
-        }
-        println(response)
-        Log.d("response", response.toString())
-        return response
-    }
-
-    suspend fun apiDataToJsonArray(result: String) {
-        withContext(Dispatchers.Main) {
-            celebrities.clear()
-            val jsonArray = JSONArray(result)
-            println(jsonArray)
-            Log.d("jsonArray", jsonArray.toString())
-            for (i in 0 until jsonArray.length()) {
-                celebrities.add(jsonArray.getJSONObject(i))
-            }
-            jsonarrayToUI()
-
-
-        }
-    }
+//    suspend fun apiDataToJsonArray(result: String) {
+//        withContext(Dispatchers.Main) {
+//            celebrities.clear()
+//            val jsonArray = JSONArray(result)
+//            println(jsonArray)
+//            Log.d("jsonArray", jsonArray.toString())
+//            for (i in 0 until jsonArray.length()) {
+//                celebrities.add(jsonArray.getJSONObject(i))
+//            }
+//            jsonarrayToUI()
+//
+//
+//        }
+//    }
 
     fun jsonarrayToUI() {
-        title.text = celebrities[ii].getString("name")
-        var aa = celebrities[ii].getString("taboo1")
-        var bb = celebrities[ii].getString("taboo2")
-        var qq = celebrities[ii].getString("taboo3")
+//        title.text = celebrities[ii].getString("name")
+        title.text = celebrities[ii].name
+//        var aa = celebrities[ii].getString("taboo1")
+        var aa = celebrities[ii].tapoo1
+//        var bb = celebrities[ii].getString("taboo2")
+        var bb = celebrities[ii].tapoo2
+//        var qq = celebrities[ii].getString("taboo3")
+        var qq = celebrities[ii].tapoo3
         someOf.text = "$aa\n$bb\n$qq"
         Log.d("titl", title.toString())
         Log.d("titl", "$aa\n$bb\n$qq")
+    }
+
+    fun tvtxt():ArrayList<Clibrites>{
+        var cil = dbhlpr.retriveData()
+        var MyText  = arrayListOf<Clibrites>()
+
+        for (i in cil.indices){
+            MyText.add(cil[i])
+
+        }
+        return MyText
+
     }
 
 

@@ -1,7 +1,9 @@
 package com.example.headsup
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -26,5 +28,21 @@ class DBHelper(context: Context):SQLiteOpenHelper(context,"HeadsUp.db",null,1) {
         var status = sdb.insert("headupdata",null,cv)
         return status
 
+    }
+
+    @SuppressLint("Range")
+    fun retriveData():ArrayList<Clibrites>{
+        var al = arrayListOf<Clibrites>()
+        var c : Cursor = sdb.query("headupdata",null,null, null,null,null,null)
+        if (c.moveToFirst()) {
+            do {
+                var name =   c.getString(c.getColumnIndex("name"))
+                var tapoo1 = c.getString(c.getColumnIndex("tapoo1"))
+                var tapoo2 = c.getString(c.getColumnIndex("tapoo2"))
+                var tapoo3 = c.getString(c.getColumnIndex("tapoo3"))
+                al.add(Clibrites(name, tapoo1, tapoo2, tapoo3))
+            } while (c.moveToNext());
+        }
+        return al
     }
 }
