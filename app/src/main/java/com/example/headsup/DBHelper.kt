@@ -9,6 +9,20 @@ import android.database.sqlite.SQLiteOpenHelper
 
 class DBHelper(context: Context):SQLiteOpenHelper(context,"HeadsUp.db",null,1) {
    var sdb:SQLiteDatabase = writableDatabase
+    var defaultarray = arrayListOf<Clibrites>(
+        Clibrites("messi","player","football","manchester"),
+        Clibrites("ket","princess","william","diana"),
+        Clibrites("korona","viarus","covid-19","stay-home"),
+        Clibrites("saudi arabia","2030","twaiq","riyadh"),
+        Clibrites("coding dojo","learning","coding","development"),
+        Clibrites("messi","player","football","manchester"),
+        Clibrites("ket","princess","william","diana"),
+        Clibrites("korona","viarus","covid-19","stay-home"),
+        Clibrites("saudi arabia","2030","twaiq","riyadh"),
+        Clibrites("coding dojo","learning","coding","development"),
+
+
+    )
     override fun onCreate(p0: SQLiteDatabase?) {
         if (p0 != null) {
             p0.execSQL("create table headupdata (name text ,tapoo1 text,tapoo2 text,tapoo3 text)")
@@ -34,6 +48,9 @@ class DBHelper(context: Context):SQLiteOpenHelper(context,"HeadsUp.db",null,1) {
     fun retriveData():ArrayList<Clibrites>{
         var al = arrayListOf<Clibrites>()
         var c : Cursor = sdb.query("headupdata",null,null, null,null,null,null)
+      if(c.count == 0){
+          al = defaultarray
+      }else{
         if (c.moveToFirst()) {
             do {
                 var name =   c.getString(c.getColumnIndex("name"))
@@ -42,7 +59,7 @@ class DBHelper(context: Context):SQLiteOpenHelper(context,"HeadsUp.db",null,1) {
                 var tapoo3 = c.getString(c.getColumnIndex("tapoo3"))
                 al.add(Clibrites(name, tapoo1, tapoo2, tapoo3))
             } while (c.moveToNext());
-        }
+        }}
         return al
     }
 }
