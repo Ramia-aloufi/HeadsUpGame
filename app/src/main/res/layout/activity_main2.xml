@@ -9,52 +9,104 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="16dp"
+            android:background="#0097A7"
+            android:gravity="center"
+            android:text="ADD CLBRITES"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextTextPersonName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/etbg"
             android:ems="10"
+            android:hint="Name"
             android:inputType="textPersonName"
-            android:hint="Name" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextTextPersonName2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/etbg"
             android:ems="10"
+            android:hint="tapoo1"
             android:inputType="textPersonName"
-            android:hint="tapoo1" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextTextPersonName3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/etbg"
             android:ems="10"
+            android:hint="tapoo2"
             android:inputType="textPersonName"
-            android:hint="tapoo2" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextTextPersonName4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/etbg"
             android:ems="10"
+            android:hint="tapoo3"
             android:inputType="textPersonName"
-            android:hint="tapoo3" />
+            android:padding="16dp" />
 
         <Button
             android:id="@+id/button3"
-            android:background="#FBC02D"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/btnbg"
             android:text="SAVE" />
+
+        <EditText
+            android:id="@+id/updel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/etbg"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:padding="16dp" />
+
+        <Button
+            android:id="@+id/upddelbtn"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btnbg"
+            android:text="Update or Delete" />
 
         <TextView
             android:id="@+id/Clibritestv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
